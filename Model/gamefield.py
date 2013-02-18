@@ -7,9 +7,9 @@ class gamefield:
 
         self.__fallenBlocks = []
 
-        for i in range(0, x):
+        for i in range(0, y):
             temp = []
-            for j in range(0, y):
+            for j in range(0, x):
                 temp.append(0)
             self.__fallenBlocks.append(temp)
 
@@ -31,10 +31,25 @@ class gamefield:
     __fallenBlocks = []
 
     def GetBlock(self, x, y):
-        return self.__fallenBlocks[x][y]
+        return self.__fallenBlocks[y][x]
 
     def SetBlock(self, x, y, value=0):
-        self.__fallenBlocks[x][y] = value
+        self.__fallenBlocks[y][x] = value
 
     def GetGrid(self):
         return self.__fallenBlocks
+
+    def updateField(self, line_to_delete):
+        #print self.__fallenBlocks
+        if not line_to_delete:
+            return
+        temp = []
+
+        for i in range(0, self.__x):
+            temp.append(0)
+
+        for line in line_to_delete:
+            del self.__fallenBlocks[line]
+            self.__fallenBlocks.insert(0,temp)
+        print self.__fallenBlocks
+

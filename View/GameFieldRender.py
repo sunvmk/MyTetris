@@ -20,8 +20,8 @@ class GameFieldRender:
 
 
     def Render(self):
-        for xNum in range(0, self.__gamefield.x - 1):
-            for yNum in range(0, self.__gamefield.y  - 1):
+        for xNum in range(0, self.__gamefield.x ):
+            for yNum in range(0, self.__gamefield.y ):
                 self.RenderBlock(xNum, yNum)
 
     def RenderBlock(self, x, y):
@@ -35,4 +35,7 @@ class GameFieldRender:
             self.__canvasData[str(x) + 'x' + str(y) + 'y'] = newGraphObject
         else:
             if(self.__canvasData.has_key(str(x) + 'x' + str(y) + 'y')):
-                self.__context.delete(self.__canvasData[x + 'x' + y + 'y'])
+                print self.__canvasData[str(x) + 'x' + str(y) + 'y']
+                self.__context.delete(self.__canvasData[str(x) + 'x' + str(y) + 'y'])
+                del self.__canvasData[str(x) + 'x' + str(y) + 'y']
+

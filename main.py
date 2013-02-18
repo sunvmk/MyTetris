@@ -21,6 +21,9 @@ class MainWrapper(TetrisWidget):
         root.bind( "<KeyPress>", controller.keypress )
 
     def update(self):
+
+        TetrisWidget.getController(self).find_full_line()
+
         if TetrisWidget.getController(self).GetCurrentFigure():#check for None
 
             if TetrisWidget.getController(self).collisionCheck("down"): #collision check
@@ -34,7 +37,7 @@ class MainWrapper(TetrisWidget):
             else:
                 TetrisWidget.getRender(self,"figure").move("down")
                 action = TetrisWidget.getController(self).getAction()
-                if action:
+                if TetrisWidget.getController(self).collisionCheck(action) is False:
                     if action == "rotate":
                         pass
                     else:
@@ -43,14 +46,13 @@ class MainWrapper(TetrisWidget):
 
 
         else:
-            print("figure None")
             #create new Figure
             TetrisWidget.getController(self).spawnFigure()
             TetrisWidget.setFigureForRender(self)
             TetrisWidget.getRender(self,"figure").Render()
 
         if True:
-            TetrisWidget.update(self)
+           TetrisWidget.update(self)
 
 
 if __name__ == "__main__":
